@@ -70,5 +70,7 @@ export function parsePath (path: string): {
 }
 
 export function cleanPath (path: string): string {
-  return path.replace(/\/\//g, '/')
+  // Replaces any "//" with "/" as long as it's not immediately preceded by ":" (for http:// and https://)
+  // Ex: https://mydomain.com//some//path becomes https://mydomain.com/some/path
+  return path.replace(/(?<!\:)\/\//g, '/')
 }
